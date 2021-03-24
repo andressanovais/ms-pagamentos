@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "module": "commonjs", //usar import * from e export * from -> compila pra 			require/module.exports
+    "target": "ES2019",
+    "esModuleInterop": true, // permitir a conversão de libs que usam o commonjs
+    "allowJs": true,
+        "experimentalDecorators": true,
+      "emitDecoratorMetadata": true
+  }
+}
