@@ -6,6 +6,10 @@
     "esModuleInterop": true, // permitir a conversão de libs que usam o commonjs
     "allowJs": true,
         "experimentalDecorators": true,
-      "emitDecoratorMetadata": true
+      "emitDecoratorMetadata": true,
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    }
   }
 }
