@@ -1,4 +1,4 @@
-import { HttpResponse, Controller, Validador } from '@/presentation/protocols'
+import { HttpResponse, Controller, Validator } from '@/presentation/protocols'
 import { badRequest, internalServerError, ok } from '@/presentation/helpers'
 import { ProcessadorPagamento } from '@/domain/usecases'
 import { PagamentoModel } from '@/domain/models'
@@ -6,13 +6,13 @@ import { InternalServerError } from '@/presentation/erros'
 
 export class PagamentoController implements Controller {
   constructor (
-    private readonly validador: Validador,
+    private readonly validator: Validator,
     private readonly processadorPagamento: ProcessadorPagamento
   ) {}
 
   async handle (request: PagamentoModel): Promise<HttpResponse> {
     try {
-      const resultadoValidacao = this.validador.validar(request)
+      const resultadoValidacao = this.validator.validar(request)
       if (resultadoValidacao.erro) {
         return badRequest(resultadoValidacao.erro)
       }

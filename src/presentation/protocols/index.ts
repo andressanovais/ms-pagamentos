@@ -1,3 +1,3 @@
 export * from './http-protocols'
-export * from './controller-protocol'
-export * from './validador'
+export * from './controller'
+export * from './validator'
