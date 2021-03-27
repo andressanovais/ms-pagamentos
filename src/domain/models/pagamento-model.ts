@@ -5,7 +5,6 @@ export interface PagamentoModel {
 
 interface Divida {
   id: number
-  valor: string
+  valor: number
   formaPagamento: string
-  ativa: boolean
 }
