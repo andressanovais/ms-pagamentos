@@ -1,7 +1,7 @@
 import Joi from 'joi'
 import { Validator, RespostaValidacao } from '@/presentation/protocols'
 import { PagamentoModel, EfetivacaoBoletoModel } from '@/domain/models'
-import { ehPagamento } from '@/infra/helpers/verifica-pagamento'
+import { ehPagamento } from '@/infra/helpers'
 
 export class JoiValidatorAdapter implements Validator {
   validar (dados: PagamentoModel | EfetivacaoBoletoModel): RespostaValidacao {
