@@ -9,9 +9,9 @@ export class JoiValidatorAdapter implements Validator {
     const { error } = schema.validate(dados)
 
     if (error) {
-      return new RespostaValidacao(true)
-    } else {
       return new RespostaValidacao(false, error)
+    } else {
+      return new RespostaValidacao(true)
     }
   }
 
