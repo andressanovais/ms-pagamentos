@@ -1,11 +1,11 @@
-import { ArmazenamentoChave, Credenciais } from './armazenamento-chave'
-import { REGION } from '@/infra/helpers'
+import { ArmazenamentoChave, CredenciaisBD } from './armazenamento-chave'
+import configs from '@/infra/helpers/configs'
 import AWS from 'aws-sdk'
 
-export class ParameterStore implements ArmazenamentoChave {
+export class ParameterStoreAdapter implements ArmazenamentoChave {
   async obter (chave: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const ssm = new AWS.SSM({ region: REGION })
+      const ssm = new AWS.SSM({ region: configs.REGION })
       const params = {
         Name: chave,
         WithDecryption: true
@@ -21,7 +21,7 @@ export class ParameterStore implements ArmazenamentoChave {
     })
   }
 
-  async obterCredenciaisBD (): Promise<Credenciais> {
+  async obterCredenciaisBD (): Promise<CredenciaisBD> {
     const credenciais = await this.obter('credenciais-mysql')
     return JSON.parse(credenciais)
   }

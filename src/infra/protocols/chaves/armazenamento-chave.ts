@@ -1,9 +1,9 @@
 export interface ArmazenamentoChave {
   obter: (chave: string) => Promise<any>
-  obterCredenciaisBD: () => Promise<Credenciais>
+  obterCredenciaisBD: () => Promise<CredenciaisBD>
 }
 
-export interface Credenciais {
+export interface CredenciaisBD {
   host: string
   user: string
   password: string
