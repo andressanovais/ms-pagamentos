@@ -34,4 +34,7 @@ const pagamentoSchema = Joi.object().keys({
 })
 
 const efetivacaoBoletoSchema = Joi.object().keys({
+  idBoleto: Joi.number().positive().required(),
+  idDivida: Joi.number().positive().required(),
+  statusBoleto: Joi.string().valid('CONFIRMADO', 'VENCIDO').required()
 })
