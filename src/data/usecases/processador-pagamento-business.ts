@@ -37,12 +37,10 @@ export class ProcessadorPagamentoBusiness implements ProcessadorPagamento {
   }
 
   inicializarPropriedades (pagamento: PagamentoModel): void {
-    const { divida } = pagamento
-
+    this.idDivida = pagamento.id
+    this.valor = pagamento.valor
+    this.formaPagamento = pagamento.formaPagamento
     this.idConta = pagamento.idConta
-    this.idDivida = divida.id
-    this.valor = divida.valor
-    this.formaPagamento = divida.formaPagamento
   }
 
   async possuiValorDisponivel (): Promise<boolean> {
