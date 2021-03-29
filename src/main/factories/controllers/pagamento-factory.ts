@@ -1,6 +1,6 @@
 import { JoiValidatorAdapter } from '@/infra/validators/joi-validator-adapter'
 import { PagamentoController } from '@/presentation/controllers/pagamento'
-import { criarProcessadorPagamento } from '../usecases/processador-pagamento-factory'
+import { criarProcessadorPagamento } from '../usecases'
 
 export const criarPagamentoController = (): PagamentoController => {
   const joiValidatorAdapter = new JoiValidatorAdapter()
