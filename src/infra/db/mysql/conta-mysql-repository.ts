@@ -1,5 +1,5 @@
 import { ContaRepository } from '@/domain/db'
-import { mySqlHelper } from '@/infra/db/mysql/mysql-helper'
+import { mySqlHelper } from './mysql-helper'
 import mysql from 'mysql'
 
 export class ContaMysqlRepository implements ContaRepository {

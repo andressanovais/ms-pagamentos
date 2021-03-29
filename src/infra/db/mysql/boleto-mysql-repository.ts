@@ -1,5 +1,5 @@
 import { BoletoRepository } from '@/domain/db'
-import { mySqlHelper } from '@/infra/db/mysql/mysql-helper'
+import { mySqlHelper } from './mysql-helper'
 import mysql from 'mysql'
 
 export class BoletoMySqlRepository implements BoletoRepository {
@@ -11,7 +11,7 @@ export class BoletoMySqlRepository implements BoletoRepository {
     dataEmissao: string,
     dataVencimento: string,
     idDivida: number
-  ): Promise<void> {
+  ): Promise<number> {
     const script = mysql.format(this.queryCriarBoleto, {
       NumeroDocumento: numeroDocumento,
       Valor: valor,
@@ -19,6 +19,7 @@ export class BoletoMySqlRepository implements BoletoRepository {
       DataVencimento: dataVencimento,
       IdDivida: idDivida
     })
-    await mySqlHelper.query(script)
+    const resultado = await mySqlHelper.query(script)
+    return resultado.insertId
   }
 }
