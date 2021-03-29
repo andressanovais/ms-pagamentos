@@ -24,6 +24,7 @@ export class ProcessadorPagamentoBusiness implements ProcessadorPagamento {
     if (possuiValorDisponivel) {
       if (this.formaPagamento === FormasPagamento.Boleto) {
         await this.emitirBoleto()
+        await this.alterarStatusDivida(StatusDivida.AguardandoConfirmacaoBoleto)
         return 'Boleto emitido com sucesso'
       } else {
         await this.alterarStatusDivida(StatusDivida.PagamentoRealizado)
@@ -31,6 +32,7 @@ export class ProcessadorPagamentoBusiness implements ProcessadorPagamento {
       }
     } else {
       await this.alterarStatusDivida(StatusDivida.PagamentoRecusado)
+      return 'Pagamento recusado. Saldo insuficiente'
     }
   }
 
