@@ -6,6 +6,7 @@ import { StatusBoleto, StatusDivida } from '../protocols'
 export class EfetivadorBoletoBusiness implements EfetivadorBoleto {
   private idDivida: number
   private statusBoleto: string
+  private dataPagamento: string
 
   constructor (
     private readonly dividaRepository: DividaRepository
@@ -15,10 +16,10 @@ export class EfetivadorBoletoBusiness implements EfetivadorBoleto {
     this.inicializarPropriedades(boleto)
 
     if (this.statusBoleto === StatusBoleto.Confirmado) {
-      await this.alterarStatusDivida(StatusDivida.PagamentoRealizado)
+      await this.alterarDivida(StatusDivida.PagamentoRealizado, this.dataPagamento)
       return 'Dívida paga com sucesso'
     } else {
-      await this.alterarStatusDivida(StatusDivida.EmAberto)
+      await this.alterarDivida(StatusDivida.EmAberto)
       return 'Boleto vencido. Necessária nova renegociação'
     }
   }
@@ -26,9 +27,10 @@ export class EfetivadorBoletoBusiness implements EfetivadorBoleto {
   inicializarPropriedades (boleto: EfetivacaoBoletoModel): void {
     this.idDivida = boleto.idDivida
     this.statusBoleto = boleto.statusBoleto
+    this.dataPagamento = boleto.dataPagamento
   }
 
-  async alterarStatusDivida (status: string): Promise<void> {
-    await this.dividaRepository.atualizarStatus(this.idDivida, status)
+  async alterarDivida (status: string, dataFim?: string): Promise<void> {
+    await this.dividaRepository.atualizarStatusDataFim(this.idDivida, status, dataFim)
   }
 }

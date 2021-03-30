@@ -1,12 +1,12 @@
-import { DividaRepository } from '@/domain/db'
+import { DividaRepository } from '@/data/db/mysql'
 import { mySqlHelper } from './mysql-helper'
 import mysql from 'mysql'
 
 export class DividaMysqlRepository implements DividaRepository {
-  private readonly queryUpdateStatus = 'UPDATE Varejo.Divida SET Status = ? WHERE Id = ?;'
+  private readonly queryUpdateStatus = 'UPDATE Varejo.Divida SET Status = ?, DataFim = ? WHERE Id = ?;'
 
-  async atualizarStatus (id: number, novoStatus: string): Promise<void> {
-    const script = mysql.format(this.queryUpdateStatus, [novoStatus, id])
+  async atualizarStatusDataFim (id: number, novoStatus: string, dataFim?: string): Promise<void> {
+    const script = mysql.format(this.queryUpdateStatus, [novoStatus, dataFim, id])
     await mySqlHelper.query(script)
   }
 }

@@ -1,3 +1,3 @@
 export interface DividaRepository {
-  atualizarStatus: (id: number, novoStatus: string) => Promise<void>
+  atualizarStatusDataFim: (id: number, novoStatus: string, dataFim?: string) => Promise<void>
 }

@@ -1,5 +1,5 @@
 import { PagamentoModel } from '@/domain/models'
-import { FormasPagamento, StatusDivida } from '@/data/protocols'
+import { FormasPagamento, StatusDivida, obterDataHoje, formatarDataISO } from '@/data/protocols'
 import { CartaoRepository, ContaRepository, DividaRepository, BoletoRepository } from '@/data/db/mysql'
 import { ProcessadorPagamento, EmissorBoleto } from '@/domain/usecases'
 
@@ -22,16 +22,10 @@ export class ProcessadorPagamentoBusiness implements ProcessadorPagamento {
 
     const possuiValorDisponivel = await this.possuiValorDisponivel()
     if (possuiValorDisponivel) {
-      if (this.formaPagamento === FormasPagamento.Boleto) {
-        await this.emitirBoleto()
-        await this.alterarStatusDivida(StatusDivida.AguardandoConfirmacaoBoleto)
-        return 'Boleto emitido com sucesso'
-      } else {
-        await this.alterarStatusDivida(StatusDivida.PagamentoRealizado)
-        return 'Divida paga com sucesso'
-      }
+      const respostaSucesso = await this.processarFormaPagamento()
+      return respostaSucesso
     } else {
-      await this.alterarStatusDivida(StatusDivida.PagamentoRecusado)
+      await this.alterarDivida(StatusDivida.PagamentoRecusado)
       return 'Pagamento recusado. Saldo insuficiente'
     }
   }
@@ -64,6 +58,17 @@ export class ProcessadorPagamentoBusiness implements ProcessadorPagamento {
     return saldo >= this.valor
   }
 
+  async processarFormaPagamento (): Promise<string> {
+    if (this.formaPagamento === FormasPagamento.Boleto) {
+      await this.emitirBoleto()
+      await this.alterarDivida(StatusDivida.AguardandoConfirmacaoBoleto)
+      return 'Boleto emitido com sucesso'
+    } else {
+      await this.alterarDivida(StatusDivida.PagamentoRealizado, obterDataHoje())
+      return 'Divida paga com sucesso'
+    }
+  }
+
   async emitirBoleto (): Promise<void> {
     const { dataEmissao, dataVencimento } = this.obterDataEmissaoEVencimento()
 
@@ -74,9 +79,9 @@ export class ProcessadorPagamentoBusiness implements ProcessadorPagamento {
   obterDataEmissaoEVencimento (): { dataEmissao: string, dataVencimento: string } {
     const dataVencimento = new Date()
     dataVencimento.setDate(dataVencimento.getDate() + 3)
-    const dataVencimentoFormatada = dataVencimento.toLocaleDateString()
 
-    const dataEmissaoFormatada = new Date().toLocaleDateString()
+    const dataVencimentoFormatada = formatarDataISO(dataVencimento)
+    const dataEmissaoFormatada = obterDataHoje()
 
     return {
       dataEmissao: dataEmissaoFormatada,
@@ -84,7 +89,7 @@ export class ProcessadorPagamentoBusiness implements ProcessadorPagamento {
     }
   }
 
-  async alterarStatusDivida (status: string): Promise<void> {
-    await this.dividaRepository.atualizarStatus(this.idDivida, status)
+  async alterarDivida (status: string, dataFim?: string): Promise<void> {
+    await this.dividaRepository.atualizarStatusDataFim(this.idDivida, status, dataFim)
   }
 }
