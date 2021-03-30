@@ -1,4 +1,4 @@
-import { BoletoRepository } from '@/domain/db'
+import { BoletoRepository } from '@/data/db/mysql'
 import { mySqlHelper } from './mysql-helper'
 import mysql from 'mysql'
 

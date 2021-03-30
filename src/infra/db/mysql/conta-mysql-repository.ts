@@ -1,4 +1,4 @@
-import { ContaRepository } from '@/domain/db'
+import { ContaRepository } from '@/data/db/mysql'
 import { mySqlHelper } from './mysql-helper'
 import mysql from 'mysql'
 

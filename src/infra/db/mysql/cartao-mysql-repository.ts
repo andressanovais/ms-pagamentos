@@ -1,4 +1,4 @@
-import { CartaoRepository } from '@/domain/db'
+import { CartaoRepository } from '@/data/db/mysql'
 import { mySqlHelper } from './mysql-helper'
 import mysql from 'mysql'
 
