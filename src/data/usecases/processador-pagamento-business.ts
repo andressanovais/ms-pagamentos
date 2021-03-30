@@ -1,6 +1,6 @@
 import { PagamentoModel } from '@/domain/models'
 import { FormasPagamento, StatusDivida } from '@/data/protocols'
-import { CartaoRepository, ContaRepository, DividaRepository, BoletoRepository } from '@/domain/db'
+import { CartaoRepository, ContaRepository, DividaRepository, BoletoRepository } from '@/data/db/mysql'
 import { ProcessadorPagamento, EmissorBoleto } from '@/domain/usecases'
 
 export class ProcessadorPagamentoBusiness implements ProcessadorPagamento {
