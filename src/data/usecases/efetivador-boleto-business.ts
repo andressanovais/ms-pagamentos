@@ -1,4 +1,4 @@
-import { DividaRepository } from '@/domain/db'
+import { DividaRepository } from '@/data/db/mysql'
 import { EfetivacaoBoletoModel } from '@/domain/models'
 import { EfetivadorBoleto } from '@/domain/usecases'
 import { StatusBoleto, StatusDivida } from '../protocols'

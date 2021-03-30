@@ -1,4 +1,4 @@
-import { EmissorBoleto } from '@/domain/usecases/emissor-boleto'
+import { EmissorBoleto } from '@/domain/usecases'
 import { Bancos, Boletos, streamToPromise } from 'gerar-boletos/lib'
 
 export class EmissorBoletoAdapter implements EmissorBoleto {
@@ -16,7 +16,7 @@ export class EmissorBoletoAdapter implements EmissorBoleto {
           cep: '00000-000'
         }
       },
-      instrucoes: ['Após o vencimento Mora dia R$ 1,59', 'Após o vencimento, multa de 2%'],
+      instrucoes: [],
       beneficiario: {
         nome: 'Empresa Fictícia LTDA',
         cnpj: '43576788000191',
