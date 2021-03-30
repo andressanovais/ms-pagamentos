@@ -18,7 +18,7 @@ export class EfetivadorBoletoBusiness implements EfetivadorBoleto {
       await this.alterarStatusDivida(StatusDivida.PagamentoRealizado)
       return 'Dívida paga com sucesso'
     } else {
-      await this.alterarStatusDivida(StatusDivida.BoletoVencido)
+      await this.alterarStatusDivida(StatusDivida.EmAberto)
       return 'Boleto vencido. Necessária nova renegociação'
     }
   }
