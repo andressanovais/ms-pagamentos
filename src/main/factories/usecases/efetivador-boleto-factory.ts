@@ -1,5 +1,5 @@
 import { EfetivadorBoleto } from '@/domain/usecases'
-import { EfetivadorBoletoBusiness } from '@/data/usecases/efetivador-boleto-business'
+import { EfetivadorBoletoBusiness } from '@/data/usecases'
 import { DividaMysqlRepository } from '@/infra/db/mysql'
 
 export const criarEfetivadorBoleto = (): EfetivadorBoleto => {
