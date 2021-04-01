@@ -1,5 +1,4 @@
 export * from './boleto-repository'
-export * from './cliente-repository'
 export * from './conta-repository'
 export * from './divida-repository'
 export * from './cartao-repository'

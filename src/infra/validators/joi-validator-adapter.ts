@@ -25,12 +25,10 @@ export class JoiValidatorAdapter implements Validator {
 }
 
 const pagamentoSchema = Joi.object().keys({
-  idConta: Joi.number().positive().required(),
-  divida: Joi.object().keys({
-    id: Joi.number().positive().required(),
-    valor: Joi.number().required(),
-    formaPagamento: Joi.string().valid('DEBITO_CONTA', 'CREDITO', 'BOLETO').required()
-  })
+  id: Joi.number().positive().required(),
+  valor: Joi.number().required(),
+  formaPagamento: Joi.string().valid('DEBITO_CONTA', 'CREDITO', 'BOLETO').required(),
+  idConta: Joi.number().positive().required()
 })
 
 const efetivacaoBoletoSchema = Joi.object().keys({
