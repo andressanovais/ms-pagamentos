@@ -1,4 +1,4 @@
 export enum StatusBoleto {
-  Confirmado = 'PAGAMENTO_CONFIRMADO',
+  Confirmado = 'CONFIRMADO',
   Vencido = 'VENCIDO'
 }
