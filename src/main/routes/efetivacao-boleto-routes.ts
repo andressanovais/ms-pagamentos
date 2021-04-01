@@ -4,5 +4,5 @@ import { criarEfetivacaoBoletoController } from '@/main/factories'
 
 export default (router: Router): void => {
   const efetivacaoBoletoController = criarEfetivacaoBoletoController()
-  router.post('./efetivacao-boleto', adaptarRota(efetivacaoBoletoController))
+  router.patch('/efetivacao-boleto', adaptarRota(efetivacaoBoletoController))
 }
