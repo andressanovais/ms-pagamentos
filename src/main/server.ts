@@ -1,3 +1,4 @@
+import 'module-alias/register'
 import { mySqlHelper } from '@/infra/db/mysql/mysql-helper'
 import { criarArmazenamentoChave } from '@/main/factories'
 
