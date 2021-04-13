@@ -4,5 +4,5 @@ import { criarPagamentoController } from '@/main/factories'
 
 export default (router: Router): void => {
   const pagamentoController = criarPagamentoController()
-  router.patch('/pagamento', adaptarRota(pagamentoController))
+  router.patch('/pagamentos', adaptarRota(pagamentoController))
 }
