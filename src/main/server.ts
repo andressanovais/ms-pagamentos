@@ -7,6 +7,6 @@ const armazenamentoChave = criarArmazenamentoChave()
 mySqlHelper.abrirConexao(armazenamentoChave)
   .then(async () => {
     const app = (await import('@/main/configs/app')).default
-    app.listen(3000, () => console.log('Server running at http://localhost:3000'))
+    app.listen(8080, () => console.log('Container port 8080'))
   })
   .catch(console.error)
